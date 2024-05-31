@@ -16,11 +16,11 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-hardcoded-string', rule, {
   valid: [
-    "const messageC = this.i18n.translate('This is a localized message');",
-    "const messageD = this.i18n.translate(`This is a ${messageA} message`);",
-    "const messageE = true",
-    "const messageF = 5",
-    "const messageG = someFunction('Hardcoded string');",
+    "const someVar = this.i18n.translate('This is a localized message');",
+    "const someVar = this.i18n.translate(`This is a ${messageA} message`);",
+    "const someVar = true",
+    "const someVar = 5",
+    "const someVar = someFunction('some-keyword-value');",
     "import { SomeComponent } from '~path/to/components/component';",
     `
       @Component({
@@ -33,14 +33,20 @@ ruleTester.run('no-hardcoded-string', rule, {
       export class SomeComponent {}
     `,
     "type SomeType = 'optA' | 'optB';",
+    "const isString = typeof cool === 'string';",
+    "const someObj = { type: 'string', value: this.i18n.translate('some.key') };",
   ],
   invalid: [
     {
-      code: "const messageA = 'Hardcoded string';",
+      code: "const someVar = 'Hardcoded string';",
       errors: [{ messageId: 'needI18n' }],
     },
     {
-      code: "const messageB = `Hardcoded ${messageA} string`;",
+      code: "const someVar = `Hardcoded ${someOtherVar} string`;",
+      errors: [{ messageId: 'needI18n' }],
+    },
+    {
+      code: "const someVar = someFunction('Hardcoded string');",
       errors: [{ messageId: 'needI18n' }],
     },
     {
@@ -49,10 +55,8 @@ ruleTester.run('no-hardcoded-string', rule, {
     },
     {
       code: `
-        const bla = {
-          changeDetection: ChangeDetectionStrategy.OnPush,
-          standalone: true,
-          selector: "h-plan-price-button",
+        const someObj = {
+          text: "Hardcoded string",
         }
       `,
       errors: [{ messageId: 'needI18n' }],
