@@ -2,7 +2,7 @@
   "name": "eslint-plugin-no-hardcoded-string",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests/**/*.test.js"
   },
