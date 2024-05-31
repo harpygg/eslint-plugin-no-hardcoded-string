@@ -32,6 +32,7 @@ ruleTester.run('no-hardcoded-string', rule, {
       export class SomeComponent {}
     `,
     "type SomeType = 'optA' | 'optB';",
+    "throw new Error('Hardcoded string');",
     // It should try to guess if it's actual text or just ID/key
     "const isString = typeof cool === 'string';",
     "const someObj = { type: 'string', value: this.i18n.translate('some.key') };",
@@ -54,10 +55,6 @@ ruleTester.run('no-hardcoded-string', rule, {
     },
     {
       code: "const someVar = someFunction('Hardcoded string');",
-      errors: [{ messageId: 'needI18n' }],
-    },
-    {
-      code: "throw new Error('Hardcoded string');",
       errors: [{ messageId: 'needI18n' }],
     },
     {
