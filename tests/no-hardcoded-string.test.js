@@ -21,7 +21,17 @@ ruleTester.run('no-hardcoded-string', rule, {
     "const messageE = true",
     "const messageF = 5",
     "const messageG = someFunction('Hardcoded string');",
-    "import { SomeComponent } from '~path/to/components/component';"
+    "import { SomeComponent } from '~path/to/components/component';",
+    `
+      @Component({
+        changeDetection: ChangeDetectionStrategy.OnPush,
+        standalone: true,
+        selector: "h-some-component",
+        template: "Content of my component",
+        styles: ":host { background-color: red }"
+      })
+      export class SomeComponent {}
+    `
   ],
   invalid: [
     {
@@ -36,6 +46,15 @@ ruleTester.run('no-hardcoded-string', rule, {
       code: "throw new Error('Hardcoded string');",
       errors: [{ messageId: 'needI18n' }],
     },
-    
+    {
+      code: `
+        const bla = {
+          changeDetection: ChangeDetectionStrategy.OnPush,
+          standalone: true,
+          selector: "h-plan-price-button",
+        }
+      `,
+      errors: [{ messageId: 'needI18n' }],
+    },
   ],
 });
