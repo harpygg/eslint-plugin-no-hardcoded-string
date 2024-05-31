@@ -18,6 +18,8 @@ ruleTester.run('no-hardcoded-string', rule, {
   valid: [
     "const messageC = this.i18n.translate('This is a localized message');",
     "const messageD = this.i18n.translate(`This is a ${messageA} message`);",
+    "const messageE = true",
+    "const messageF = 5",
   ],
   invalid: [
     {
