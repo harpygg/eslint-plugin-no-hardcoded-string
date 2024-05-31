@@ -9,6 +9,8 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
   valid: [
     `<div>{{ 'translated_string' | transloco }}</div>`,
     `<div>{{ 'This is already translated' | transloco }}</div>`,
+    `<div>{{ someVar$ | async }}</div>`,
+    `<div>{{ 5 | somePipe }}</div>`,
   ],
   invalid: [
     {
