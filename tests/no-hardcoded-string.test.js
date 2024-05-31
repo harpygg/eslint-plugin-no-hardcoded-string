@@ -20,7 +20,8 @@ ruleTester.run('no-hardcoded-string', rule, {
     "const messageD = this.i18n.translate(`This is a ${messageA} message`);",
     "const messageE = true",
     "const messageF = 5",
-    "import { SomeComponent } from '~path/to/components/component'"
+    "const messageG = someFunction('Hardcoded string');",
+    "import { SomeComponent } from '~path/to/components/component';"
   ],
   invalid: [
     {
@@ -31,5 +32,10 @@ ruleTester.run('no-hardcoded-string', rule, {
       code: "const messageB = `Hardcoded ${messageA} string`;",
       errors: [{ messageId: 'needI18n' }],
     },
+    {
+      code: "throw new Error('Hardcoded string');",
+      errors: [{ messageId: 'needI18n' }],
+    },
+    
   ],
 });
