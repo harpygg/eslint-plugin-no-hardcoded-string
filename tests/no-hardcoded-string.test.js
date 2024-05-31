@@ -31,7 +31,8 @@ ruleTester.run('no-hardcoded-string', rule, {
         styles: ":host { background-color: red }"
       })
       export class SomeComponent {}
-    `
+    `,
+    "type SomeType = 'optA' | 'optB';",
   ],
   invalid: [
     {
