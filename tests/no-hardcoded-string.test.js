@@ -33,6 +33,7 @@ ruleTester.run('no-hardcoded-string', rule, {
     `,
     "type SomeType = 'optA' | 'optB';",
     "throw new Error('Hardcoded string');",
+    "throw new Error(`Hardcoded ${someVar}`);",
     // It should try to guess if it's actual text or just ID/key
     "const isString = typeof cool === 'string';",
     "const someObj = { type: 'string', value: this.i18n.translate('some.key') };",
