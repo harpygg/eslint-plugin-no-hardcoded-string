@@ -20,6 +20,7 @@ ruleTester.run('no-hardcoded-string', rule, {
     "const messageD = this.i18n.translate(`This is a ${messageA} message`);",
     "const messageE = true",
     "const messageF = 5",
+    "import { SomeComponent } from '~path/to/components/component'"
   ],
   invalid: [
     {
