@@ -20,7 +20,6 @@ ruleTester.run('no-hardcoded-string', rule, {
     "const someVar = this.i18n.translate(`This is a ${messageA} message`);",
     "const someVar = true",
     "const someVar = 5",
-    "const someVar = someFunction('some-keyword-value');",
     "import { SomeComponent } from '~path/to/components/component';",
     `
       @Component({
@@ -33,12 +32,20 @@ ruleTester.run('no-hardcoded-string', rule, {
       export class SomeComponent {}
     `,
     "type SomeType = 'optA' | 'optB';",
+    // It should try to guess if it's actual text or just ID/key
     "const isString = typeof cool === 'string';",
     "const someObj = { type: 'string', value: this.i18n.translate('some.key') };",
+    "const someVar = 'QslkjJKLjqliJdlqkjdzlijLKqjdiz'", 
+    "const someVar = 'some-keyword-value'",
+    "const someVar = someFunction('some-keyword-value');",
   ],
   invalid: [
     {
       code: "const someVar = 'Hardcoded string';",
+      errors: [{ messageId: 'needI18n' }],
+    },
+    {
+      code: "const someVar = 'Hardcoded';",
       errors: [{ messageId: 'needI18n' }],
     },
     {
