@@ -40,6 +40,7 @@ ruleTester.run('no-hardcoded-string', rule, {
     "const someVar = 'QslkjJKLjqliJdlqkjdzlijLKqjdiz'", 
     "const someVar = 'some-keyword-value'",
     "const someVar = someFunction('some-keyword-value');",
+    "console.log('Hardcoded string');",
   ],
   invalid: [
     {
