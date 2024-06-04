@@ -10,7 +10,9 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
     `<div>{{ 'translated_string' | transloco }}</div>`,
     `<div>{{ 'This is already translated' | transloco }}</div>`,
     `<div>{{ someVar$ | async }}</div>`,
-    `<div>{{ 5 | somePipe }}</div>`,
+    `<div [attr]="'translated_string' | transloco"></div>`,
+    `<div type="some_type"></div>`,
+    `<div>{{ 5 | somePipe }}</div>`
   ],
   invalid: [
     {
@@ -25,5 +27,13 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
       code: '<div>{{ "Hardcoded string" }}</div>',
       errors: [{ messageId: 'transloco' }],
     },
-  ],
+    {
+      code: '<div type="My type"></div>',
+      errors: [{ messageId: 'transloco' }],
+    },
+    {
+      code: '<div name="Bobby"></div>',
+      errors: [{ messageId: 'transloco' }],
+    },
+  ]
 });
