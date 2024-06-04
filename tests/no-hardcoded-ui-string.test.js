@@ -12,6 +12,7 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
     `<div>{{ someVar$ | async }}</div>`,
     `<div [attr]="'translated_string' | transloco"></div>`,
     `<div type="some_type"></div>`,
+    `<div class="someClass other-class"></div>`,
     `<div>{{ 5 | somePipe }}</div>`
   ],
   invalid: [
