@@ -13,6 +13,7 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
     `<div [attr]="'translated_string' | transloco"></div>`,
     `<div type="some_type"></div>`,
     `<div class="someClass other-class"></div>`,
+    `<div style="color: 'red'; font-size: 12px;"></div>`,
     `<div>{{ 5 | somePipe }}</div>`
   ],
   invalid: [
