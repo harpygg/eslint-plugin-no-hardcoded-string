@@ -18,6 +18,10 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
       errors: [{ messageId: 'transloco' }],
     },
     {
+      code: '<div>{{ "some.dynamic." + someVar + ".key" | transloco }}</div>',
+      errors: [{ messageId: 'transloco' }],
+    },
+    {
       code: '<div>{{ "Hardcoded string" }}</div>',
       errors: [{ messageId: 'transloco' }],
     },

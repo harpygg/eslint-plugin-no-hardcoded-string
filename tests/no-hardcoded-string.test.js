@@ -17,7 +17,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-hardcoded-string', rule, {
   valid: [
     "const someVar = this.i18n.translate('This is a localized message');",
-    "const someVar = this.i18n.translate(`This is a ${messageA} message`);",
     "const someVar = true",
     "const someVar = 5",
     "import { SomeComponent } from '~path/to/components/component';",
@@ -53,6 +52,10 @@ ruleTester.run('no-hardcoded-string', rule, {
     },
     {
       code: "const someVar = `Hardcoded ${someOtherVar} string`;",
+      errors: [{ messageId: 'needI18n' }],
+    },
+    {
+      code: "this.i18n.translate(`some.dynamic.${someOtherVar}.key`);",
       errors: [{ messageId: 'needI18n' }],
     },
     {
