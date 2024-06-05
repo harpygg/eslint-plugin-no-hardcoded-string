@@ -16,7 +16,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-hardcoded-string', rule, {
   valid: [
-    "const someVar = this.i18n.translate('This is a localized message');",
+    "const someVar = this.i18n.instant('This is a localized message');",
     "const someVar = true",
     "const someVar = 5",
     "import { SomeComponent } from '~path/to/components/component';",
@@ -35,7 +35,7 @@ ruleTester.run('no-hardcoded-string', rule, {
     "throw new Error(`Hardcoded ${someVar}`);",
     // It should try to guess if it's actual text or just ID/key
     "const isString = typeof cool === 'string';",
-    "const someObj = { type: 'string', value: this.i18n.translate('some.key') };",
+    "const someObj = { type: 'string', value: this.i18n.instant('some.key') };",
     "const someVar = 'QslkjJKLjqliJdlqkjdzlijLKqjdiz'", 
     "const someVar = 'some-keyword-value'",
     "const someVar = someFunction('some-keyword-value');",
@@ -55,7 +55,7 @@ ruleTester.run('no-hardcoded-string', rule, {
       errors: [{ messageId: 'needI18n' }],
     },
     {
-      code: "this.i18n.translate(`some.dynamic.${someOtherVar}.key`);",
+      code: "this.i18n.instant(`some.dynamic.${someOtherVar}.key`);",
       errors: [{ messageId: 'needI18n' }],
     },
     {

@@ -7,10 +7,10 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-hardcoded-ui-string', rule, {
   valid: [
-    `<div>{{ 'translated_string' | transloco }}</div>`,
-    `<div>{{ 'This is already translated' | transloco }}</div>`,
+    `<div>{{ 'translated_string' | translate }}</div>`,
+    `<div>{{ 'This is already translated' | translate }}</div>`,
     `<div>{{ someVar$ | async }}</div>`,
-    `<div [attr]="'translated_string' | transloco"></div>`,
+    `<div [attr]="'translated_string' | translate"></div>`,
     `<div type="some_type"></div>`,
     `<div class="someClass other-class"></div>`,
     `<div style="color: 'red'; font-size: 12px;"></div>`,
@@ -19,23 +19,23 @@ ruleTester.run('no-hardcoded-ui-string', rule, {
   invalid: [
     {
       code: '<div>Hardcoded string</div>',
-      errors: [{ messageId: 'transloco' }],
+      errors: [{ messageId: 'translate' }],
     },
     {
-      code: '<div>{{ "some.dynamic." + someVar + ".key" | transloco }}</div>',
-      errors: [{ messageId: 'transloco' }],
+      code: '<div>{{ "some.dynamic." + someVar + ".key" | translate }}</div>',
+      errors: [{ messageId: 'translate' }],
     },
     {
       code: '<div>{{ "Hardcoded string" }}</div>',
-      errors: [{ messageId: 'transloco' }],
+      errors: [{ messageId: 'translate' }],
     },
     {
       code: '<div type="My type"></div>',
-      errors: [{ messageId: 'transloco' }],
+      errors: [{ messageId: 'translate' }],
     },
     {
       code: '<div name="Bobby"></div>',
-      errors: [{ messageId: 'transloco' }],
+      errors: [{ messageId: 'translate' }],
     },
   ]
 });
